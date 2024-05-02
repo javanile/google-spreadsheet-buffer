@@ -21,15 +21,20 @@ if (empty($accessToken)) {
     exit;
 }
 
-var_dump($accessToken);
-
-exit;
-
 $pdo = new PDO("mysql:host=0.0.0.0;dbname={$database}", 'root', $password);
 $pdo->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, false);
 
 $unbufferedResult = $pdo->query($query);
 
-foreach ($unbufferedResult as $row) {
-    var_dump($row);
+$dataset = $unbufferedResult->fetchAll(PDO::FETCH_ASSOC);
+
+$output = array();
+foreach ($dataset as $row) {
+    $outputRow = array();
+    foreach ($row as $cell) {
+        $outputRow[] = $cell;
+    }
+    $output[] = $outputRow;
 }
+
+echo json_encode($output, JSON_PRETTY_PRINT);
