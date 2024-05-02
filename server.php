@@ -18,7 +18,7 @@ if (isset($headers['Authorization'])) {
 
 if (empty($accessToken)) {
     http_response_code(401);
-    exit;
+    die('Authorization token is not valid.'.PHP_EOL);
 }
 
 $pdo = new PDO("mysql:host=0.0.0.0;dbname={$database}", 'root', $password);
