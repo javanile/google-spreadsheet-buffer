@@ -2,7 +2,6 @@
 
 $headers = getallheaders();
 $query = file_get_contents('php://input');
-$database = 'mysql';
 $password = getenv('MARIADB_ROOT_PASSWORD');
 $accessToken = null;
 
@@ -21,7 +20,10 @@ if (empty($accessToken)) {
     die('Authorization token is not valid.'.PHP_EOL);
 }
 
-$pdo = new PDO("mysql:host=0.0.0.0;dbname={$database}", 'root', $password);
+$database = $accessToken['database'] ?? 'mysql';
+$username = $accessToken['username'] ?? 'root';
+
+$pdo = new PDO("mysql:host=0.0.0.0;dbname={$database}", $username, $password);
 $pdo->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, false);
 
 $unbufferedResult = $pdo->query($query);
