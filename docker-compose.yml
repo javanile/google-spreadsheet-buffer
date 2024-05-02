@@ -1,0 +1,7 @@
+services:
+  gsb:
+    build: .
+    ports:
+      - "6612:6612"
+    environment:
+      - MARIADB_ROOT_PASSWORD=root
