@@ -86,6 +86,20 @@ Execute query inside Google Spreadsheet
 =BUFFER_QUERY("Secret1234!@b48d-1X6-1X7-1X5-Y4.ngrok-free.app"; "SELECT * FROM my_table")
 ```
 
+## Connection String
+
+The connection string for Buffer is as follows:
+
+```
+[protocol]://[username]:[password]@[host]:[port]/[database]
+```
+
+For example:
+
+- `"MyBufferPassword@mybufferhost.net"` (default protocol and port)
+- `"http://MyBufferPassword@mybufferhost:6612"` (custom protocol and port)
+- `"http://MyBufferUsername:MyBufferPassword@mybufferhost:6612/BufferDatabase"` (full connection string)
+
 ## Custom Function
 
 Buffer includes a custom function `BUFFER_QUERY` which allows users to execute SQL queries directly from Google Spreadsheet. 

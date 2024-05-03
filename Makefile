@@ -7,6 +7,9 @@ start: build
 	@docker compose up -d --force-recreate --remove-orphans
 	@ngrok http 6612
 
+down:
+	@docker compose down -v
+
 push:
 	@docker build -t javanile/buffer:latest .
 	@docker push javanile/buffer:latest
