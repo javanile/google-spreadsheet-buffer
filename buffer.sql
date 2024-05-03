@@ -1,0 +1,8 @@
+DELIMITER //
+
+CREATE PROCEDURE BUFFER(IN `buffer` VARCHAR(34))
+BEGIN
+SELECT 'Hello, world!' AS message;
+END //
+
+DELIMITER ;

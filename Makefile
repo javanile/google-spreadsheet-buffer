@@ -15,3 +15,9 @@ test-errors:
 
 test-info:
 	@bash tests/info-test.sh
+
+test-create-buffer:
+	@bash tests/create-buffer-test.sh
+
+test-multiple-query:
+	@bash tests/multiple-query-test.sh

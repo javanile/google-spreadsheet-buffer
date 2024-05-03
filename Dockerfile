@@ -11,6 +11,7 @@ RUN mv /usr/local/bin/docker-entrypoint.sh /usr/local/bin/mariadb-entrypoint.sh
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
 COPY server.php /var/www/html/server.php
+COPY buffer.sql /docker-entrypoint-initdb.d/buffer.sql
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["mariadbd"]

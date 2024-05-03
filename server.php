@@ -2,6 +2,7 @@
 
 $dsn = 'mysql:host=0.0.0.0;dbname=%s';
 $pdoOptions = [
+    PDO::ATTR_EMULATE_PREPARES => 1,
     PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false,
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 ];
@@ -21,7 +22,7 @@ if ($_SERVER['REQUEST_URI'] == '/_health') {
 }
 
 $headers = getallheaders();
-$query = file_get_contents('php://input');
+$sql = file_get_contents('php://input');
 $tokenError = 'Authorization token is not valid.'.PHP_EOL;
 $accessToken = null;
 $options = filter_input(INPUT_GET, 'options');
@@ -52,21 +53,28 @@ try {
     die($tokenError);
 }
 
+$output = array();
+$queries = preg_split('/;\s*(?=(?:[^\'\\\']*\'[^\'\\\']*\')*[^\'\\\']*$)/', $sql);
+
 try {
-    $unbufferedResult = $pdo->query($query);
-    $dataset = $unbufferedResult->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($queries as $query) {
+        $query = trim($query);
+        if (empty($query)) {
+            continue;
+        }
+        $unbufferedResult = $pdo->query($query);
+        $dataset = $unbufferedResult->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($dataset as $row) {
+            $outputRow = array();
+            foreach ($row as $cell) {
+                $outputRow[] = $cell;
+            }
+            $output[] = $outputRow;
+        }
+    }
 } catch (\PDOException $exception) {
     http_response_code(422);
     die($exception->getMessage().PHP_EOL);
 }
 
-$output = array();
-foreach ($dataset as $row) {
-    $outputRow = array();
-    foreach ($row as $cell) {
-        $outputRow[] = $cell;
-    }
-    $output[] = $outputRow;
-}
-
-echo json_encode($output, JSON_PRETTY_PRINT);
+echo json_encode($output, JSON_PRETTY_PRINT).PHP_EOL;
