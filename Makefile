@@ -11,3 +11,7 @@ test-insert:
 
 test-errors:
 	@bash tests/errors-test.sh
+
+test-info:
+	@bash tests/info-test.sh
+

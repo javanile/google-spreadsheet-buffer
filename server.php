@@ -1,5 +1,25 @@
 <?php
 
+$dsn = 'mysql:host=0.0.0.0;dbname=%s';
+$pdoOptions = [
+    PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false,
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+];
+
+if ($_SERVER['REQUEST_URI'] == '/_health') {
+    $health = ['status' => 'ok'];
+
+    try {
+        new PDO(sprintf($dsn, getenv('BUFFER_DATABASE')), getenv('BUFFER_USER'), getenv('BUFFER_PASSWORD'), $pdoOptions);
+    } catch (\PDOException $exception) {
+        http_response_code(503);
+        $health['status'] = 'error';
+        $health['message'] = $exception->getMessage();
+    }
+
+    die(json_encode($health).PHP_EOL);
+}
+
 $headers = getallheaders();
 $query = file_get_contents('php://input');
 $tokenError = 'Authorization token is not valid.'.PHP_EOL;

@@ -1,9 +1,9 @@
 services:
-  gsb:
+  buffer:
     build: .
     ports:
       - "6612:6612"
     environment:
-      - MARIADB_ROOT_PASSWORD=root
+      - BUFFER_PASSWORD=secret
     volumes:
       - .:/var/www/html
