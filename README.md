@@ -13,6 +13,13 @@ This project also includes a custom function `BUFFER_QUERY` which enables the ex
 - [Contributing](#contributing)
 - [License](#license)
 
+## Tech Stack
+
+- Docker
+- Ngrok
+- Google Spreadsheet
+- MariaDB
+
 ## Installation
 
 To run Buffer locally, make sure you have Docker installed on your system. Then follow these steps:
