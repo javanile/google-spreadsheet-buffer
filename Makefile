@@ -4,7 +4,8 @@ build:
 	@docker compose build
 
 start: build
-	@docker compose up --build --force-recreate gsb
+	@docker compose up -d --build --force-recreate
+	@ngrok http --log=false 6612
 
 test-insert:
 	@bash tests/insert-test.sh
@@ -14,4 +15,3 @@ test-errors:
 
 test-info:
 	@bash tests/info-test.sh
-
