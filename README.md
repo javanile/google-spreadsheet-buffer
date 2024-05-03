@@ -98,12 +98,12 @@ For example:
 
 - `"MyBufferPassword@mybufferhost.net"` (default protocol and port)
 - `"http://MyBufferPassword@mybufferhost:6612"` (custom protocol and port)
-- `"http://MyBufferUsername:MyBufferPassword@mybufferhost:6612/BufferDatabase"` (full connection string)
+- `"http://MyBufferUsername:MyBufferPassword@mybufferhost:6612/BufferDatabase"` (full string)
 
 ## Custom Function
 
 Buffer includes a custom function `BUFFER_QUERY` which allows users to execute SQL queries directly from Google Spreadsheet. 
-Simply include the function in your spreadsheet and provide the SQL query as an argument.
+Simply include the function in your spreadsheet and provide the SQL query as an argument [(Read mode)](https://developers.google.com/apps-script/guides/sheets/functions).
 
 ```javascript
 function BUFFER_QUERY(url, query, options) {
