@@ -69,7 +69,7 @@ docker run -d -e BUFFER_PASSWORD=Secret1234! -p 6612:6612 javanile/buffer
 Create table and insert data
 
 ```shell
- export BUFFER_TOKEN=$(echo -n '{"password":"'${BUFFER_PASSWORD}'"}' | base64)
+export BUFFER_TOKEN=$(echo -n '{"password":"'${BUFFER_PASSWORD}'"}' | base64)
 
 curl -H "Authorization: Bearer ${BUFFER_TOKEN}" localhost:6612 -d '
   CREATE TABLE my_table (
@@ -83,7 +83,7 @@ curl -H "Authorization: Bearer ${BUFFER_TOKEN}" localhost:6612 -d '
 Execute query inside Google Spreadsheet
 
 ```shell    
-=BUFFER_QUERY("secret@b48d-1X6-1X7-1X5-Y4.ngrok-free.app"; "SELECT * FROM my_table")
+=BUFFER_QUERY("Secret1234!@b48d-1X6-1X7-1X5-Y4.ngrok-free.app"; "SELECT * FROM my_table")
 ```
 
 ## Custom Function
@@ -92,7 +92,7 @@ Buffer includes a custom function `BUFFER_QUERY` which allows users to execute S
 Simply include the function in your spreadsheet and provide the SQL query as an argument.
 
 ```javascript
-function GSB_QUERY(url, query, options) {
+function BUFFER_QUERY(url, query, options) {
   const accessToken = {};
   const regex = /^(?:([A-Za-z]+):\/\/)?(?:([A-Za-z0-9_]+):)?([A-Za-z0-9\-._~%!$&'()*+,;=]+)@([A-Za-z0-9.-]+)(?::([0-9]+))?(?:\/([A-Za-z0-9_]+))?$/;
   const match = url.match(regex);
