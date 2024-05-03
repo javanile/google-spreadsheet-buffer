@@ -41,15 +41,12 @@ if (empty($accessToken) || empty($accessToken['password'])) {
     die($tokenError);
 }
 
-$database = $accessToken['database'] ?? 'mysql';
-$username = $accessToken['username'] ?? 'root';
+$database = $accessToken['database'] ?? getenv('BUFFER_DATABASE');
+$username = $accessToken['username'] ?? getenv('BUFFER_USER');
 $password = $accessToken['password'];
 
 try {
-    $pdo = new PDO("mysql:host=0.0.0.0;dbname={$database}", $username, $password, [
-        PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false,
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ]);
+    $pdo = new PDO(sprintf($dsn, $database), $username, $password, $pdoOptions);
 } catch (\PDOException $exception) {
     http_response_code(401);
     die($tokenError);
