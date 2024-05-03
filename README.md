@@ -37,6 +37,8 @@ To run Buffer locally, make sure you have Docker installed on your system. Then 
 
 Buffer is now running locally on port 6612.
 
+Please note: For testing in a public environment, remember to modify the `BUFFER_PASSWORD` variable in the `docker-compose.yml` file to ensure security.
+
 ## Usage
 
 To use Buffer, you can send HTTP requests to the exposed REST endpoints. Additionally, you can leverage the custom function BUFFER_QUERY directly from Google Spreadsheet to execute SQL queries on the database.

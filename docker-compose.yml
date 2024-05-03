@@ -4,6 +4,6 @@ services:
     ports:
       - "6612:6612"
     environment:
-      - BUFFER_PASSWORD=secret
+      - BUFFER_PASSWORD=l0ngS3cur3P4ss
     volumes:
       - .:/var/www/html
