@@ -11,9 +11,10 @@ export BUFFER_TOKEN=$(echo -n '{"password":"'${BUFFER_PASSWORD}'"}' | base64)
 
 curl -H "Authorization: Bearer ${BUFFER_TOKEN}" localhost:6612 -d '
   CREATE TABLE my_table (
-    my_field VARCHAR(100)
-  );
-  
+    my_field_1 VARCHAR(100),
+    my_field_2 VARCHAR(100)
+  );  
+  INSERT INTO my_table (my_field_1, my_field_2) VALUES ("Hello", "World");
 '
 ```
 
