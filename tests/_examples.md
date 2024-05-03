@@ -21,3 +21,11 @@ curl -H "Authorization: Bearer eyJwYXNzd29yZCI6ImwwbmdTM2N1cjNQNHNzIn0=" localho
             , ("Ciao",     "Mondo!")
             , ("Bonjour",  "Monde!");
 '
+```
+
+Select data from table
+
+```shell
+curl -H "Authorization: Bearer eyJwYXNzd29yZCI6ImwwbmdTM2N1cjNQNHNzIn0=" localhost:6612 \
+     -d 'SELECT * FROM my_table'
+```

@@ -63,6 +63,14 @@ try {
             continue;
         }
         $unbufferedResult = $pdo->query($query);
+
+        $header = [];
+        for ($index = 0; $index < $unbufferedResult->columnCount(); $index++) {
+            $columnMeta = $unbufferedResult->getColumnMeta($index);
+            $header[] = $columnMeta['name'];
+        }
+        $output[] = $header;
+
         $dataset = $unbufferedResult->fetchAll(PDO::FETCH_ASSOC);
         foreach ($dataset as $row) {
             $outputRow = array();
