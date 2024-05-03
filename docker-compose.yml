@@ -1,9 +1,21 @@
 services:
+
   buffer:
     build: .
-    ports:
-      - "6612:6612"
     environment:
       - BUFFER_PASSWORD=l0ngS3cur3P4ss
+    ports:
+      - "6612:6612"
     volumes:
       - .:/var/www/html
+
+  adminer:
+    image: javanile/adminer
+    environment:
+      - MYSQL_HOST=buffer
+      - MYSQL_DATABASE=buffer
+      - MYSQL_ROOT_PASSWORD=l0ngS3cur3P4ss
+    ports:
+      - "8080:8080"
+    links:
+      - buffer
