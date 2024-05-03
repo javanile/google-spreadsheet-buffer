@@ -4,6 +4,7 @@ $headers = getallheaders();
 $query = file_get_contents('php://input');
 $tokenError = 'Authorization token is not valid.'.PHP_EOL;
 $accessToken = null;
+$options = filter_input(INPUT_GET, 'options');
 
 if (isset($headers['Authorization'])) {
     $authorizationHeader = $headers['Authorization'];
