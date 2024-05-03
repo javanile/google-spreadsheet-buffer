@@ -1,11 +1,15 @@
 
 build:
 	@chmod +x docker-entrypoint.sh
-	@docker compose build
+	@docker compose build -q
 
 start: build
-	@docker compose up -d --build --force-recreate
-	@ngrok http --log=false 6612
+	@docker compose up -d --force-recreate --remove-orphans
+	@ngrok http 6612
+
+push:
+	@docker build -t javanile/buffer:latest .
+	@docker push javanile/buffer:latest
 
 test-insert:
 	@bash tests/insert-test.sh

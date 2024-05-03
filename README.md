@@ -1,5 +1,4 @@
 # google-spreadsheet-buffer
-google-spreadsheet-sql
 
 ```shell
 docker run -d -e BUFFER_PASSWORD=Secret1234! -p 6612:6612 javanile/buffer
